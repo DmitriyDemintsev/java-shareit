@@ -8,7 +8,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import ru.practicum.client.BaseClient;
-import ru.practicum.item.dto.ItemDto;
+import ru.practicum.item.dto.ItemGatewayDto;
 
 import java.util.Map;
 
@@ -27,12 +27,12 @@ public class ItemClient extends BaseClient {
     }
 
     /* PostMapping */
-    public ResponseEntity<Object> addItem(long userId, ItemDto requestDto) {
+    public ResponseEntity<Object> addItem(long userId, ItemGatewayDto requestDto) {
         return post("", userId, requestDto);
     }
 
     /* PatchMapping("/{id}") */
-    public ResponseEntity<Object> updateItem(long userId, ItemDto requestDto, long id) {
+    public ResponseEntity<Object> updateItem(long userId, ItemGatewayDto requestDto, long id) {
         Map<String, Object> parameters = Map.of("id", id);
         return patch("/{id}", userId, parameters, requestDto);
     }

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDto {
+public class ItemGatewayDto {
     private Long id;
     @NotBlank
     private String name;

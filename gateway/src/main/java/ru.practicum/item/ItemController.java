@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.item.dto.ItemDto;
+import ru.practicum.item.dto.ItemGatewayDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -22,14 +22,14 @@ public class ItemController {
 
     @PostMapping
     public ResponseEntity<Object> addItem(@RequestHeader("X-Sharer-User-Id") Long userId,
-                                          @Valid @RequestBody ItemDto itemDto) {
+                                          @Valid @RequestBody ItemGatewayDto itemDto) {
         log.info("Creating item {}, userId={}", itemDto, userId);
         return itemClient.addItem(userId, itemDto);
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<Object> updateItem(@RequestHeader("X-Sharer-User-Id") long userId,
-                                             @RequestBody ItemDto requestDto,
+                                             @RequestBody ItemGatewayDto requestDto,
                                              @PathVariable("id") long id) {
         return itemClient.updateItem(userId, requestDto, id);
     }
