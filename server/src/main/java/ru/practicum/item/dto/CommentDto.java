@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class CommentDto {
     private Long id; // идентификатор комментария
     private String text; //содержимое комментария
-    private Long item; //вещь, к которой относится комментарий
+    private ItemDto item; //вещь, к которой относится комментарий
     private UserDto author; //автор комментария - тот, кто пользовался вещью
     private String authorName;
     private LocalDateTime created; //дата создания комментария
