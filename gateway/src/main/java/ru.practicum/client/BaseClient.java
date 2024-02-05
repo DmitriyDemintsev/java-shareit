@@ -1,6 +1,5 @@
 package ru.practicum.client;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.http.*;
 import org.springframework.lang.Nullable;
 import org.springframework.web.client.HttpStatusCodeException;

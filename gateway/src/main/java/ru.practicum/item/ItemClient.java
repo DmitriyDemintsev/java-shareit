@@ -40,7 +40,8 @@ public class ItemClient extends BaseClient {
     /* DeleteMapping("/{itemId}") */
     public ResponseEntity<Object> deleteItem(long id) {
         Map<String, Object> parameters = Map.of("id", id);
-        return delete("/{itemId}", id, parameters);    }
+        return delete("/{itemId}", id, parameters);
+    }
 
     /* GetMapping */
     public ResponseEntity<Object> getItems(long userId, Integer from, Integer size) {
