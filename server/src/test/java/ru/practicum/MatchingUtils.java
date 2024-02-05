@@ -8,7 +8,9 @@ import static org.hamcrest.Matchers.is;
 
 public class MatchingUtils {
 
-    private MatchingUtils() {};
+    private MatchingUtils() {
+
+    }
 
     public static Matcher<String> isLocalDateTime(
             final LocalDateTime localDateTime

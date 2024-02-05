@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User save (User user); //создать/обновить
+    User save(User user); //создать/обновить
 
     List<User> findAll(); //найти всех user
 
