@@ -9,14 +9,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@AllArgsConstructor
 public class CommentMapper {
 
-    private final ItemMapper itemMapper;
-    private final UserMapper userMapper;
-
-    public Comment toComment(CommentCreateDto commentCreateDto, Long id) {
+    public static Comment toComment(CommentCreateDto commentCreateDto, Long id) {
         return new Comment(
                 id,
                 commentCreateDto.getText(),
@@ -26,18 +21,18 @@ public class CommentMapper {
         );
     }
 
-    public CommentDto toCommentDto(Comment comment) {
+    public static CommentDto toCommentDto(Comment comment) {
         return new CommentDto(
                 comment.getId(),
                 comment.getText(),
-                itemMapper.toItemDto(comment.getItem()),
-                userMapper.toUserDto(comment.getAuthor()),
+                ItemMapper.toItemDto(comment.getItem()),
+                UserMapper.toUserDto(comment.getAuthor()),
                 comment.getAuthor().getName(),
                 comment.getCreated()
         );
     }
 
-    public List<CommentDto> toItemDtoListList(Iterable<Comment> comments) {
+    public static List<CommentDto> toCommentDtoListList(Iterable<Comment> comments) {
         List<CommentDto> result = new ArrayList<>();
         for (Comment comment : comments) {
             result.add(toCommentDto(comment));

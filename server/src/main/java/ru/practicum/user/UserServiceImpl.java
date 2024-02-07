@@ -17,12 +17,6 @@ class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public List<User> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users;
-    }
-
-    @Override
     @Transactional
     public User create(User user) {
         if (user.getName() == null || user.getName().isEmpty()) {
@@ -57,6 +51,12 @@ class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users;
     }
 
     @Override

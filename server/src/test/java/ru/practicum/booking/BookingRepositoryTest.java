@@ -44,7 +44,7 @@ class BookingRepositoryTest {
         owner = userRepository.save(owner);
 
         Item item = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         item = itemRepository.save(item);
 
         Sort sortByStartDesc = Sort.by(Sort.Direction.DESC, "start");
@@ -67,9 +67,9 @@ class BookingRepositoryTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -98,9 +98,9 @@ class BookingRepositoryTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item firstIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         firstIem = itemRepository.save(firstIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -127,9 +127,9 @@ class BookingRepositoryTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item firstIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         firstIem = itemRepository.save(firstIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -156,11 +156,11 @@ class BookingRepositoryTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item firstIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item thirdItem = new Item(null, "шуруповерт", "работает от аккумулятора",
-                true, owner, null);
+                true, owner, null, null, null, null);
         firstIem = itemRepository.save(firstIem);
         secondItem = itemRepository.save(secondItem);
         thirdItem = itemRepository.save(thirdItem);

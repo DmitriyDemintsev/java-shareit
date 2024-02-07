@@ -38,9 +38,9 @@ class ItemRepositoryTest {
         secondOwner = userRepository.save(secondOwner);
 
         Item firstItem = new Item(null, "дрель", "питание от сети",
-                true, firstOwner, null);
+                true, firstOwner, null, null, null, null);
         Item secondItem = new Item(null, "аккумуляторная дрель", "два аккумулятора и зарядник",
-                true, secondOwner, null);
+                true, secondOwner, null, null, null, null);
         firstItem = itemRepository.save(firstItem);
         secondItem = itemRepository.save(secondItem);
 

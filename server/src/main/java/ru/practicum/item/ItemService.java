@@ -21,7 +21,7 @@ public interface ItemService {
 
     List<Item> findAllItems();
 
-    Item getItemById(long id);
+    Item getItemById(long userId, long id);
 
     List<Item> getItemsBySearch(String query, int from, int size);
 

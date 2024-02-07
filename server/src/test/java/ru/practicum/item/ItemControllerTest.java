@@ -5,20 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.practicum.booking.BookingService;
 import ru.practicum.booking.dto.BookingDto;
-import ru.practicum.booking.dto.BookingMapper;
 import ru.practicum.item.dto.CommentDto;
-import ru.practicum.item.dto.CommentMapper;
 import ru.practicum.item.dto.ItemDto;
-import ru.practicum.item.dto.ItemMapper;
+import ru.practicum.item.model.Comment;
 import ru.practicum.item.model.Item;
 import ru.practicum.request.model.ItemRequest;
 import ru.practicum.user.dto.UserDto;
-import ru.practicum.user.dto.UserMapper;
 import ru.practicum.user.model.User;
 
 import java.nio.charset.StandardCharsets;
@@ -45,39 +41,34 @@ class ItemControllerTest {
     BookingService bookingService;
     @Autowired
     private MockMvc mvc;
-    @SpyBean
-    private ItemMapper itemMapper;
-    @SpyBean
-    private UserMapper userMapper;
-    @SpyBean
-    private CommentMapper commentMapper;
-    @SpyBean
-    private BookingMapper bookingMapper;
 
     private LocalDateTime created = LocalDateTime.now();
     private User owner = new User(0L, "Иван Иванов", "ivai@ivanov.ru");
     private UserDto ownerDto = new UserDto(0L, "Иван Иванов", "ivai@ivanov.ru");
     private User requestor = new User(1L, "Петр Петров", "petr@petrov.ru");
-    private UserDto requestorDto = new UserDto(1L, "Петр Петров", "petr@petrov.ru");
-    private List<CommentDto> comments = new ArrayList<>();
+    private List<CommentDto> commentDtos = new ArrayList<>();
+    private List<Comment> comment = new ArrayList<>();
+
+    private Item createdItem = new Item(0L, "дрель", "дрель аккумуляторная", true,
+            owner, null, null, null, null);
     private Item item = new Item(0L, "дрель", "дрель аккумуляторная", true,
-            owner, null);
+            owner, null, null, comment, null);
     private ItemDto itemDto = new ItemDto(0L, "дрель", "дрель аккумуляторная", true,
             ownerDto.getId(),
-            null, null, comments, null);
+            null, null, commentDtos, null);
     private ItemDto createdItemDto = new ItemDto(0L, "дрель", "дрель аккумуляторная", true,
             ownerDto.getId(),
             null, null, null, null);
     private Item updateItem = new Item(0L, "дрель аккумуляторная", "3 аккумулятора + зарядное устройство", false,
-            owner, null);
+            owner, null, null, null, null);
     private ItemDto updateItemDto = new ItemDto(0L, "дрель аккумуляторная", "3 аккумулятора + зарядное устройство", false,
             ownerDto.getId(), null, null, null, null);
     private Item itemForList = new Item(1L, "дрель аккумуляторная", "3 аккумулятора + зарядное устройство", false,
-            owner, null);
+            owner, null, null, comment, null);
     private ItemDto itemDtoForList = new ItemDto(1L, "дрель аккумуляторная", "3 аккумулятора + зарядное устройство", false,
-            ownerDto.getId(), null, null, comments, null);
+            ownerDto.getId(), null, null, commentDtos, null);
     private ItemDto itemDtoForSearch = new ItemDto(1L, "дрель аккумуляторная", "3 аккумулятора + зарядное устройство", false,
-            ownerDto.getId(), null, null, null, null);
+            ownerDto.getId(), null, null, commentDtos, null);
 
     private ItemRequest request = new ItemRequest(0L, "срочно нужен аккумуляторный шуруповерт",
             requestor, created);
@@ -86,7 +77,7 @@ class ItemControllerTest {
 
     @Test
     void createItem() throws Exception {
-        when(itemService.create(anyLong(), any(), any())).thenReturn(item);
+        when(itemService.create(anyLong(), any(), any())).thenReturn(createdItem);
 
         mvc.perform(post("/items")
                         .content(mapper.writeValueAsString(itemDto))
@@ -154,7 +145,7 @@ class ItemControllerTest {
                 .andExpect(jsonPath("$[0].owner", is(ownerDto.getId()), Long.class))
                 .andExpect(jsonPath("$[0].nextBooking", is(nextBookingDto.getBooker())))
                 .andExpect(jsonPath("$[0].lastBooking", is(lastBookingDto.getBooker())))
-                .andExpect(jsonPath("$[0].comments", is(itemDto.getComments())))
+                .andExpect(jsonPath("$[0].comments", is(itemDtoForList.getComments())))
                 .andExpect(jsonPath("$[0].requestId", is(itemDto.getRequestId()), Long.class))
                 .andExpect(jsonPath("$[1].id", is(itemDtoForList.getId()), Long.class))
                 .andExpect(jsonPath("$[1].name", is(itemDtoForList.getName())))
@@ -169,7 +160,7 @@ class ItemControllerTest {
 
     @Test
     void getItemDtoById() throws Exception {
-        when(itemService.getItemById(anyLong())).thenReturn(item);
+        when(itemService.getItemById(anyLong(), anyLong())).thenReturn(item);
 
         mvc.perform(get("/items/{id}", ownerDto.getId())
                         .accept(MediaType.APPLICATION_JSON)
@@ -188,12 +179,12 @@ class ItemControllerTest {
 
     @Test
     void getSearchItem() throws Exception {
-        List<Item> items = List.of(item, itemForList);
+        List<Item> items = List.of(createdItem, itemForList);
         when(itemService.getItemsBySearch(anyString(), anyInt(), anyInt())).thenReturn(items);
 
         mvc.perform(get("/items/search")
                         .accept(MediaType.APPLICATION_JSON)
-                        .queryParam("text", item.getName(), item.getDescription()))
+                        .queryParam("text", createdItem.getName(), createdItem.getDescription()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id", is(createdItemDto.getId()), Long.class))
                 .andExpect(jsonPath("$[0].name", is(createdItemDto.getName())))

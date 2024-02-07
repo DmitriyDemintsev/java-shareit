@@ -42,7 +42,7 @@ class BookingServiceImplTest {
         when(userRepository.findById(booker.getId())).thenReturn(Optional.of(booker));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, user, null);
+                true, user, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
@@ -64,7 +64,7 @@ class BookingServiceImplTest {
         when(userRepository.findById(booker.getId())).thenReturn(Optional.of(booker));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, user, null);
+                true, user, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
@@ -83,7 +83,7 @@ class BookingServiceImplTest {
         when(userRepository.findById(booker.getId())).thenReturn(Optional.of(booker));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, user, null);
+                true, user, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
@@ -102,7 +102,7 @@ class BookingServiceImplTest {
         when(userRepository.findById(booker.getId())).thenReturn(Optional.of(booker));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, user, null);
+                true, user, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
@@ -121,7 +121,7 @@ class BookingServiceImplTest {
         when(userRepository.findById(booker.getId())).thenReturn(Optional.of(booker));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, user, null);
+                true, user, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
@@ -140,7 +140,7 @@ class BookingServiceImplTest {
         when(userRepository.findById(booker.getId())).thenReturn(Optional.of(booker));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                false, user, null);
+                false, user, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
@@ -159,7 +159,7 @@ class BookingServiceImplTest {
         when(userRepository.findById(booker.getId())).thenReturn(Optional.of(booker));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
@@ -178,14 +178,12 @@ class BookingServiceImplTest {
         when(userRepository.findById(booker.getId())).thenReturn(Optional.of(booker));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
         Booking oldBooking = new Booking(0L, current.plusDays(1),
                 current.plusDays(2), item, booker, BookingStatus.WAITING);
-        Booking newBooking = new Booking(0L, current.plusDays(1),
-                current.plusDays(2), item, booker, BookingStatus.APPROVED);
 
         when(bookingRepository.findById(oldBooking.getId())).thenReturn(Optional.of(oldBooking));
 
@@ -204,7 +202,7 @@ class BookingServiceImplTest {
         when(userRepository.findById(booker.getId())).thenReturn(Optional.of(booker));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
@@ -223,7 +221,7 @@ class BookingServiceImplTest {
         when(userRepository.findById(booker.getId())).thenReturn(Optional.of(booker));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
@@ -241,7 +239,7 @@ class BookingServiceImplTest {
         User booker = new User(1L, "Петр Петров", "petr@petrov.ru");
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
 
         LocalDateTime current = LocalDateTime.now();
         Booking expectedBooking = new Booking(0L, current.plusDays(1),
@@ -269,7 +267,7 @@ class BookingServiceImplTest {
         User owner = new User(2L, "Петр Петров", "petr@petrov.ru");
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
 
         Booking booking = new Booking(0L, LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(2), item, booker, BookingStatus.APPROVED);

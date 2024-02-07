@@ -6,7 +6,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.practicum.booking.BookingService;
+import ru.practicum.booking.model.Booking;
 import ru.practicum.exception.*;
+import ru.practicum.item.model.Comment;
 import ru.practicum.item.model.Item;
 import ru.practicum.request.ItemRequestRepository;
 import ru.practicum.request.model.ItemRequest;
@@ -21,6 +24,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
+    private final CommentService commentService;
+    private final BookingService bookingService;
     private final UserRepository userRepository;
     private final ItemRequestRepository itemRequestRepository;
 
@@ -92,9 +97,14 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item getItemById(long id) {
-        return itemRepository.findById(id)
+    public Item getItemById(long userId, long id) {
+        Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("item не найден"));
+        addComment(item);
+        if (item.getOwner().equals(userId)) {
+            addBookings(item);
+        }
+        return item;
     }
 
     @Override
@@ -103,7 +113,15 @@ public class ItemServiceImpl implements ItemService {
                 .orElseThrow(() -> new UserNotFoundException("user не найден"));
         Sort sortById = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(from > 0 ? from / size : 0, size, sortById);
-        return itemRepository.findByOwner(user, pageable).getContent();
+
+        List<Item> items = itemRepository.findByOwner(user, pageable).getContent();
+        for (Item item : items) {
+            addComment(item);
+            if (item.getOwner().equals(id)) {
+                addBookings(item);
+            }
+        }
+        return items;
     }
 
     public List<Item> getItemsBySearch(String query, int from, int size) {
@@ -119,5 +137,21 @@ public class ItemServiceImpl implements ItemService {
         ItemRequest itemRequest = itemRequestRepository.getItemRequestById(requestId);
         Sort sortById = Sort.by(Sort.Direction.DESC, "id");
         return itemRepository.findByRequest(itemRequest, sortById);
+    }
+
+    private void addComment(Item item) {
+        List<Comment> comments = commentService.getComments(item.getId());
+        item.setComments(comments);
+    }
+
+    private void addBookings(Item item) {
+        Booking last = bookingService.getLast(item.getId());
+        Booking next = bookingService.getNext(item.getId());
+        if (last != null) {
+            item.setLastBooking(last);
+        }
+        if (next != null) {
+            item.setNextBooking(next);
+        }
     }
 }

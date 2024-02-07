@@ -40,9 +40,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -69,9 +69,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -98,9 +98,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -127,9 +127,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -156,9 +156,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -185,9 +185,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -223,9 +223,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -252,9 +252,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -281,9 +281,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -310,9 +310,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -339,9 +339,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -368,9 +368,9 @@ class BookingServiceImplIntegrationTest {
         booker = userRepository.save(booker);
         owner = userRepository.save(owner);
         Item festIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "стремянка", "высота 2 метра",
-                true, owner, null);
+                true, owner, null, null, null, null);
         festIem = itemRepository.save(festIem);
         secondItem = itemRepository.save(secondItem);
 

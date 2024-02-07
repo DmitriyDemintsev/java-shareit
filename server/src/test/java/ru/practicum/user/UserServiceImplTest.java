@@ -11,10 +11,11 @@ import ru.practicum.exception.UserNotFoundException;
 import ru.practicum.exception.UserValidationException;
 import ru.practicum.user.model.User;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -81,6 +82,44 @@ class UserServiceImplTest {
     }
 
     @Test
+    void update_whenUserEmailNotValid_thenUserValidationException() {
+        Long userId = 0L;
+        User oldUser = new User();
+        oldUser.setId(userId);
+        oldUser.setName("Иван Иванов");
+        oldUser.setEmail("ivai@ivanov.ru");
+
+        User newUser = new User();
+        newUser.setId(oldUser.getId());
+        newUser.setName("Петр Петров");
+        newUser.setEmail("");
+
+        when(userRepository.findById(userId)).thenReturn(Optional.of(oldUser));
+
+        assertThrows(UserValidationException.class, () -> userService.update(newUser));
+        verify(userRepository, never()).save(newUser);
+    }
+
+    @Test
+    void update_whenUserNameNotValid_thenUserValidationException() {
+        Long userId = 0L;
+        User oldUser = new User();
+        oldUser.setId(userId);
+        oldUser.setName("Иван Иванов");
+        oldUser.setEmail("ivai@ivanov.ru");
+
+        User newUser = new User();
+        newUser.setId(oldUser.getId());
+        newUser.setName("");
+        newUser.setEmail("petr@retrov.ru");
+
+        when(userRepository.findById(userId)).thenReturn(Optional.of(oldUser));
+
+        assertThrows(UserValidationException.class, () -> userService.update(newUser));
+        verify(userRepository, never()).save(newUser);
+    }
+
+    @Test
     void getUserById_whenUserFound_thenReturnedUser() {
         long userId = 0L;
         User expectedUser = new User();
@@ -97,5 +136,31 @@ class UserServiceImplTest {
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundException.class, () -> userService.getUserById(userId));
+    }
+
+    @Test
+    void getAllUsers() {
+        User fistUser = new User(0L, "Иван Иванов", "ivai@ivanov.ru");
+        User secondUser = new User(1L, "Петр Петров", "petr@petrov.ru");
+        User thirdUser = new User(2L, "Степан Степанов", "stepan@stepanov.ru");
+
+        List<User> users = new ArrayList<>();
+        users.add(fistUser);
+        users.add(secondUser);
+        users.add(thirdUser);
+
+        when(userRepository.findAll()).thenReturn(users);
+
+        List<User> actualUser = userService.getAllUsers();
+
+        assertEquals(users, actualUser);
+    }
+
+    @Test
+    void deleteUser() {
+        User user = new User(0L, "Иван Иванов", "ivai@ivanov.ru");
+
+        userRepository.deleteById(user.getId());
+        assertNull(userRepository.getById(user.getId()));
     }
 }

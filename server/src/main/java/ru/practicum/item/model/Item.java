@@ -3,10 +3,12 @@ package ru.practicum.item.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.practicum.booking.model.Booking;
 import ru.practicum.request.model.ItemRequest;
 import ru.practicum.user.model.User;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,6 +27,12 @@ public class Item {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private User owner; //владелец вещи (тот, кто создал её)
+    @Transient
+    private Booking nextBooking;
+    @Transient
+    private Booking lastBooking;
+    @Transient
+    private List<Comment> comments;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id")
     private ItemRequest request; //ссылка на запрос user'а, для которого была создана вещь == ответ на запрос

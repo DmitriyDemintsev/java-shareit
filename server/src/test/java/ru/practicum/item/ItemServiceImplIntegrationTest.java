@@ -34,9 +34,9 @@ public class ItemServiceImplIntegrationTest {
         owner = userRepository.save(owner);
 
         Item firstIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "гитара", "есть чехол и каподастр",
-                true, owner, null);
+                true, owner, null, null, null, null);
         firstIem = itemRepository.save(firstIem);
         secondItem = itemRepository.save(secondItem);
 
@@ -59,9 +59,9 @@ public class ItemServiceImplIntegrationTest {
         User owner = new User(null, "Иван Иванов", "ivai@ivanov.ru");
         owner = userRepository.save(owner);
         Item firstIem = new Item(null, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         Item secondItem = new Item(null, "аккумуляторная дрель", "два аккумулятора и зарядник",
-                true, owner, null);
+                true, owner, null, null, null, null);
 
         firstIem = itemRepository.save(firstIem);
         secondItem = itemRepository.save(secondItem);

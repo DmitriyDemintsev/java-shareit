@@ -18,22 +18,20 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/requests")
 public class ItemRequestController {
-    private final ItemRequestMapper itemRequestMapper;
     private final ItemRequestService itemRequestService;
     private final ItemService itemService;
-    private final ItemMapper itemMapper;
     private final UserService userService;
 
     @PostMapping
     public ItemRequestDto createItemRequest(@RequestHeader("X-Sharer-User-Id") Long userId,
                                             @Valid @RequestBody ItemRequestDto itemRequestDto) {
-        return itemRequestMapper.toItemRequestDto(itemRequestService.create(userId,
-                itemRequestMapper.toItemRequest(itemRequestDto, null)));
+        return ItemRequestMapper.toItemRequestDto(itemRequestService.create(userId,
+                ItemRequestMapper.toItemRequest(itemRequestDto, null)));
     }
 
     @GetMapping
     public List<ItemRequestDto> getListMineRequests(@RequestHeader("X-Sharer-User-Id") long userId) {
-        List<ItemRequestDto> itemRequestDtos = itemRequestMapper
+        List<ItemRequestDto> itemRequestDtos = ItemRequestMapper
                 .toItemRequestDtoList(itemRequestService.getAllMineRequests(userId));
         //данные об ответах
         for (ItemRequestDto itemRequestDto : itemRequestDtos) {
@@ -47,7 +45,7 @@ public class ItemRequestController {
                                        @RequestParam(value = "from", defaultValue = "0") int from,
                                        @RequestParam(value = "size", defaultValue = "10") int size) {
         userService.getUserById(userId);
-        List<ItemRequestDto> itemRequestDtos = itemRequestMapper
+        List<ItemRequestDto> itemRequestDtos = ItemRequestMapper
                 .toItemRequestDtoList(itemRequestService.getAllRequest(userId, from, size));
         for (ItemRequestDto itemRequestDto : itemRequestDtos) {
             addResponse(itemRequestDto);
@@ -59,7 +57,7 @@ public class ItemRequestController {
     public ItemRequestDto getItemRequestDtoById(@RequestHeader("X-Sharer-User-Id") long userId,
                                                 @PathVariable("requestId") long id) {
         userService.getUserById(userId);
-        ItemRequestDto itemRequestDto = itemRequestMapper.toItemRequestDto(itemRequestService.getRequestById(id));
+        ItemRequestDto itemRequestDto = ItemRequestMapper.toItemRequestDto(itemRequestService.getRequestById(id));
         //данные об ответах
         addResponse(itemRequestDto);
         return itemRequestDto;
@@ -67,6 +65,6 @@ public class ItemRequestController {
 
     private void addResponse(ItemRequestDto itemRequestDto) {
         List<Item> items = itemService.getByRequest(itemRequestDto.getId());
-        itemRequestDto.setItems(itemMapper.toItemDtoList(items));
+        itemRequestDto.setItems(ItemMapper.toItemDtoList(items));
     }
 }

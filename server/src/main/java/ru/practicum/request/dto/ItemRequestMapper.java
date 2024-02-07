@@ -1,18 +1,14 @@
 package ru.practicum.request.dto;
 
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 import ru.practicum.request.model.ItemRequest;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@NoArgsConstructor
 public class ItemRequestMapper {
 
-    public ItemRequest toItemRequest(ItemRequestDto itemRequestDto, Long id) {
+    public static ItemRequest toItemRequest(ItemRequestDto itemRequestDto, Long id) {
         return new ItemRequest(
                 id,
                 itemRequestDto.getDescription(),
@@ -21,7 +17,7 @@ public class ItemRequestMapper {
         );
     }
 
-    public ItemRequestDto toItemRequestDto(ItemRequest itemRequest) {
+    public static ItemRequestDto toItemRequestDto(ItemRequest itemRequest) {
         return new ItemRequestDto(
                 itemRequest.getId(),
                 itemRequest.getDescription(),
@@ -30,18 +26,10 @@ public class ItemRequestMapper {
         );
     }
 
-    public List<ItemRequestDto> toItemRequestDtoList(Iterable<ItemRequest> itemRequests) {
+    public static List<ItemRequestDto> toItemRequestDtoList(Iterable<ItemRequest> itemRequests) {
         List<ItemRequestDto> result = new ArrayList<>();
         for (ItemRequest itemRequest : itemRequests) {
             result.add(toItemRequestDto(itemRequest));
-        }
-        return result;
-    }
-
-    public List<ItemRequest> toItemRequestList(Iterable<ItemRequestDto> itemRequestDtos) {
-        List<ItemRequest> result = new ArrayList<>();
-        for (ItemRequestDto itemRequestDto : itemRequestDtos) {
-            result.add(toItemRequest(itemRequestDto, itemRequestDto.getId()));
         }
         return result;
     }

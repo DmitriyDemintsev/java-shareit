@@ -1,16 +1,12 @@
 package ru.practicum.user.dto;
 
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 import ru.practicum.user.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@NoArgsConstructor
 public class UserMapper {
-    public User toUser(UserDto userDto, Long id) {
+    public static User toUser(UserDto userDto, Long id) {
         User user = new User(
                 id,
                 userDto.getName(),
@@ -18,7 +14,7 @@ public class UserMapper {
         return user;
     }
 
-    public UserDto toUserDto(User user) {
+    public static UserDto toUserDto(User user) {
         UserDto userDto = new UserDto(
                 user.getId(),
                 user.getName(),
@@ -26,7 +22,7 @@ public class UserMapper {
         return userDto;
     }
 
-    public List<UserDto> toUserDtoList(Iterable<User> users) {
+    public static List<UserDto> toUserDtoList(Iterable<User> users) {
         List<UserDto> result = new ArrayList<>();
         for (User user : users) {
             result.add(toUserDto(user));

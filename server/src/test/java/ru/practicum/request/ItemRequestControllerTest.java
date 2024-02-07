@@ -5,22 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.practicum.booking.BookingService;
-import ru.practicum.booking.dto.BookingMapper;
-import ru.practicum.item.CommentService;
 import ru.practicum.item.ItemService;
-import ru.practicum.item.dto.CommentMapper;
 import ru.practicum.item.dto.ItemDto;
-import ru.practicum.item.dto.ItemMapper;
 import ru.practicum.request.dto.ItemRequestDto;
-import ru.practicum.request.dto.ItemRequestMapper;
 import ru.practicum.request.model.ItemRequest;
 import ru.practicum.user.UserService;
 import ru.practicum.user.dto.UserDto;
-import ru.practicum.user.dto.UserMapper;
 import ru.practicum.user.model.User;
 
 import java.nio.charset.StandardCharsets;
@@ -49,20 +41,6 @@ class ItemRequestControllerTest {
     ItemService itemService;
     @MockBean
     UserService userService;
-    @MockBean
-    CommentService commentService;
-    @MockBean
-    BookingService bookingService;
-    @SpyBean
-    private ItemRequestMapper itemRequestMapper;
-    @SpyBean
-    private ItemMapper itemMapper;
-    @SpyBean
-    private UserMapper userMapper;
-    @SpyBean
-    private CommentMapper commentMapper;
-    @SpyBean
-    private BookingMapper bookingMapper;
 
     private User user = new User(0L, "Иван Иванов", "ivai@ivanov.ru");
     private UserDto userDto = new UserDto(0L, "Иван Иванов", "ivai@ivanov.ru");

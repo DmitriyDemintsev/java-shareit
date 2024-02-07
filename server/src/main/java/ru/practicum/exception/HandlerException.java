@@ -82,12 +82,6 @@ public class HandlerException {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT) //ошибка 409
-    public ErrorResponse handleUserAlreadyExistException(final UserAlreadyExistException e) {
-        return new ErrorResponse(e.getMessage());
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.CONFLICT) //ошибка 409
     public ErrorResponse handleItemAlreadyExistException(final ItemAlreadyExistException e) {
         return new ErrorResponse(e.getMessage());
     }

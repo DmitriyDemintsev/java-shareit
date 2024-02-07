@@ -5,18 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.practicum.booking.dto.BookingDto;
-import ru.practicum.booking.dto.BookingMapper;
 import ru.practicum.booking.model.Booking;
-import ru.practicum.item.dto.CommentMapper;
 import ru.practicum.item.dto.ItemDto;
-import ru.practicum.item.dto.ItemMapper;
 import ru.practicum.item.model.Item;
 import ru.practicum.user.dto.UserDto;
-import ru.practicum.user.dto.UserMapper;
 import ru.practicum.user.model.User;
 
 import java.nio.charset.StandardCharsets;
@@ -39,21 +34,13 @@ class BookingControllerTest {
     BookingService bookingService;
     @Autowired
     private MockMvc mvc;
-    @SpyBean
-    private BookingMapper bookingMapper;
-    @SpyBean
-    private CommentMapper commentMapper;
-    @SpyBean
-    private ItemMapper itemMapper;
-    @SpyBean
-    private UserMapper userMapper;
 
     private User owner = new User(0L, "Иван Иванов", "ivai@ivanov.ru");
     private UserDto ownerDto = new UserDto(0L, "Иван Иванов", "ivai@ivanov.ru");
     private User booker = new User(1L, "Петр Петров", "petr@petrov.ru");
     private UserDto bookerDto = new UserDto(1L, "Петр Петров", "petr@petrov.ru");
     private Item item = new Item(0L, "дрель", "питание от сети",
-            true, owner, null);
+            true, owner, null, null, null, null);
     private ItemDto itemDto = new ItemDto(0L, "дрель", "питание от сети", true, owner.getId(),
             null, null, null, null);
     private LocalDateTime current = LocalDateTime.now();

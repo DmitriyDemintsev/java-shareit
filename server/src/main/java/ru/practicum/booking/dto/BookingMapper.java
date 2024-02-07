@@ -1,7 +1,5 @@
 package ru.practicum.booking.dto;
 
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 import ru.practicum.booking.BookingStatusForFilter;
 import ru.practicum.booking.model.Booking;
 import ru.practicum.exception.BookingValidationException;
@@ -11,13 +9,9 @@ import ru.practicum.user.dto.UserMapper;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-@AllArgsConstructor
 public class BookingMapper {
-    private final ItemMapper itemMapper;
-    private final UserMapper userMapper;
 
-    public Booking toBooking(BookingCreateDto bookingCreateDto, Long id) {
+    public static Booking toBooking(BookingCreateDto bookingCreateDto, Long id) {
         Booking booking = new Booking(
                 id,
                 bookingCreateDto.getStart(),
@@ -29,20 +23,20 @@ public class BookingMapper {
         return booking;
     }
 
-    public BookingDto toBookingDto(Booking booking) {
+    public static BookingDto toBookingDto(Booking booking) {
         BookingDto bookingDto = new BookingDto(
                 booking.getId(),
                 booking.getStart(),
                 booking.getEnd(),
-                itemMapper.toItemDto(booking.getItem()),
-                userMapper.toUserDto(booking.getBooker()),
+                ItemMapper.toItemDto(booking.getItem()),
+                UserMapper.toUserDto(booking.getBooker()),
                 booking.getBooker().getId(),
                 booking.getStatus()
         );
         return bookingDto;
     }
 
-    public BookingStatusForFilter toStatus(String status) {
+    public static BookingStatusForFilter toStatus(String status) {
         try {
             return BookingStatusForFilter.valueOf(status);
         } catch (IllegalArgumentException e) {
@@ -50,7 +44,7 @@ public class BookingMapper {
         }
     }
 
-    public List<BookingDto> toBookingDtoList(Iterable<Booking> bookings) {
+    public static List<BookingDto> toBookingDtoList(Iterable<Booking> bookings) {
         List<BookingDto> result = new ArrayList<>();
         for (Booking booking : bookings) {
             result.add(toBookingDto(booking));

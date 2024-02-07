@@ -49,7 +49,7 @@ class CommentServiceImplTest {
         when(userRepository.findById(author.getId())).thenReturn(Optional.of(author));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
@@ -78,22 +78,15 @@ class CommentServiceImplTest {
     @Test
     void create_whenBookingStartNotValid_thenBookingValidationException() {
 
-        BookingServiceImpl mockBookingServiceImpl = Mockito.mock(BookingServiceImpl.class);
-
         User author = new User(0L, "Иван Иванов", "ivai@ivanov.ru"); //он же booker
         User owner = new User(1L, "Петр Петров", "petr@petrov.ru");
         when(userRepository.findById(author.getId())).thenReturn(Optional.of(author));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
-
-        Booking booking = new Booking(0L, current.minusDays(5), current.minusDays(2),
-                item, author, BookingStatus.APPROVED);
-        //      when(mockBookingServiceImpl.getAllBookings(author.getId(), BookingStatusForFilter.PAST, 1, 1));
-
 
         Comment comment = new Comment(0L, "вся правда об использовании дрели", item, author, current);
 
@@ -109,7 +102,7 @@ class CommentServiceImplTest {
         when(userRepository.findById(author.getId())).thenReturn(Optional.of(author));
 
         Item item = new Item(0L, "дрель", "питание от сети",
-                true, owner, null);
+                true, owner, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         LocalDateTime current = LocalDateTime.now();
@@ -125,7 +118,7 @@ class CommentServiceImplTest {
         User owner = new User(0L, "Иван Иванов", "ivai@ivanov.ru");
 
         Item item = new Item(0L, "дрель", "дрель аккумуляторная",
-                true, owner, null);
+                true, owner, null, null, null, null);
         when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
 
         Comment fistComment = new Comment();
