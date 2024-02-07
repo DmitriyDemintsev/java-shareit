@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import ru.practicum.booking.BookingRepository;
 import ru.practicum.booking.BookingServiceImpl;
 import ru.practicum.booking.model.Booking;
 import ru.practicum.exception.ItemAlreadyExistException;
