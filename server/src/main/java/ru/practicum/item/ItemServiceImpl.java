@@ -101,7 +101,7 @@ public class ItemServiceImpl implements ItemService {
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("item не найден"));
         addComment(item);
-        if (item.getOwner().equals(userId)) {
+        if (item.getOwner().getId().equals(userId)) {
             addBookings(item);
         }
         return item;
@@ -117,7 +117,7 @@ public class ItemServiceImpl implements ItemService {
         List<Item> items = itemRepository.findByOwner(user, pageable).getContent();
         for (Item item : items) {
             addComment(item);
-            if (item.getOwner().equals(id)) {
+            if (item.getOwner().getId().equals(id)) {
                 addBookings(item);
             }
         }
