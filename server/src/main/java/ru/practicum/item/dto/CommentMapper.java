@@ -1,7 +1,5 @@
 package ru.practicum.item.dto;
 
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 import ru.practicum.item.model.Comment;
 import ru.practicum.user.dto.UserMapper;
 

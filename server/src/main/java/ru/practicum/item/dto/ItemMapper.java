@@ -1,7 +1,5 @@
 package ru.practicum.item.dto;
 
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 import ru.practicum.booking.dto.BookingMapper;
 import ru.practicum.item.model.Item;
 
