@@ -11,6 +11,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import ru.practicum.booking.BookingRepository;
+import ru.practicum.booking.BookingServiceImpl;
+import ru.practicum.booking.model.Booking;
 import ru.practicum.exception.ItemAlreadyExistException;
 import ru.practicum.exception.ItemNotFoundException;
 import ru.practicum.exception.ItemValidationException;
@@ -33,6 +36,8 @@ class ItemServiceImplTest {
     private ItemRepository itemRepository;
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private BookingServiceImpl bookingService;
     @Mock
     private CommentServiceImpl commentService;
     @InjectMocks
@@ -168,9 +173,14 @@ class ItemServiceImplTest {
 
         List<Comment> comments = new ArrayList<>();
 
+        Booking last = new Booking();
+        Booking next = new Booking();
+
         Item expectedItem = new Item(0L, "дрель", "дрель аккумуляторная",
-                true, user, null, null, comments, null);
+                true, user, next, last, comments, null);
         when(commentService.getComments(expectedItem.getId())).thenReturn(comments);
+        when(bookingService.getNext(expectedItem.getId())).thenReturn(next);
+        when(bookingService.getLast(expectedItem.getId())).thenReturn(last);
         when(itemRepository.findById(expectedItem.getId())).thenReturn(Optional.of(expectedItem));
 
         Item actualItem = itemService.getItemById(user.getId(), expectedItem.getId());
