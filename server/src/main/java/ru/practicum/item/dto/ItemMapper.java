@@ -30,9 +30,9 @@ public class ItemMapper {
                 item.getDescription(),
                 item.getAvailable(),
                 item.getOwner().getId(),
-                item.getNextBooking() != null ? BookingMapper.toBookingDto(item.getNextBooking()) : null,
-                item.getLastBooking() != null ? BookingMapper.toBookingDto(item.getLastBooking()) : null,
-                item.getComments() != null ? CommentMapper.toCommentDtoListList(item.getComments()) : null,
+                item.getNextBooking() != null ? BookingMapper.toBookingDto(item.getNextBooking(), false) : null,
+                item.getLastBooking() != null ? BookingMapper.toBookingDto(item.getLastBooking(), false) : null,
+                item.getComments() != null ? CommentMapper.toCommentDtoListList(item.getComments(), false) : null,
                 item.getRequest() != null ? item.getRequest().getId() : null
         );
     }
@@ -44,33 +44,4 @@ public class ItemMapper {
         }
         return result;
     }
-
-//    public static Comment toComment(CommentCreateDto commentCreateDto, Long id) {
-//        return new Comment(
-//                id,
-//                commentCreateDto.getText(),
-//                null,
-//                null,
-//                LocalDateTime.now()
-//        );
-//    }
-//
-//    public static CommentDto toCommentDto(Comment comment) {
-//        return new CommentDto(
-//                comment.getId(),
-//                comment.getText(),
-//                toItemDto(comment.getItem()),
-//                UserMapper.toUserDto(comment.getAuthor()),
-//                comment.getAuthor().getName(),
-//                comment.getCreated()
-//        );
-//    }
-//
-//    public static List<CommentDto> toItemDtoListList(Iterable<Comment> comments) {
-//        List<CommentDto> result = new ArrayList<>();
-//        for (Comment comment : comments) {
-//            result.add(toCommentDto(comment));
-//        }
-//        return result;
-//    }
 }

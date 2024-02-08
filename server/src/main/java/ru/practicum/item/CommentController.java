@@ -20,7 +20,8 @@ public class CommentController {
     public CommentDto createComment(@RequestHeader("X-Sharer-User-Id") Long userId,
                                     @PathVariable("itemId") long itemId,
                                     @Valid @RequestBody CommentCreateDto commentCreateDto) {
+
         return CommentMapper.toCommentDto(commentService.create(userId, itemId,
-                CommentMapper.toComment(commentCreateDto, null)));
+                CommentMapper.toComment(commentCreateDto, null)), true);
     }
 }

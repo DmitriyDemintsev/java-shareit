@@ -24,20 +24,20 @@ public class BookingController {
     public BookingDto createBooking(@RequestHeader("X-Sharer-User-Id") long userId,
                                     @Valid @RequestBody BookingCreateDto bookingCreateDto) {
         return BookingMapper.toBookingDto(bookingService.create(BookingMapper.toBooking(bookingCreateDto, null),
-                userId, bookingCreateDto.getItemId()));
+                userId, bookingCreateDto.getItemId()), true);
     }
 
     @PatchMapping("/{id}")
     public BookingDto updateBooking(@RequestHeader("X-Sharer-User-Id") long userId,
                                     @PathVariable("id") long id,
                                     @RequestParam("approved") boolean approved) {
-        return BookingMapper.toBookingDto(bookingService.update(id, approved, userId));
+        return BookingMapper.toBookingDto(bookingService.update(id, approved, userId), true);
     }
 
     @GetMapping("/{id}")
     public BookingDto getBookingDtoById(@RequestHeader("X-Sharer-User-Id") long userId,
                                         @PathVariable long id) {
-        return BookingMapper.toBookingDto(bookingService.getBookingById(userId, id));
+        return BookingMapper.toBookingDto(bookingService.getBookingById(userId, id), true);
     }
 
     @GetMapping
@@ -46,7 +46,7 @@ public class BookingController {
                                                   @RequestParam(value = "from", defaultValue = "0") int from,
                                                   @RequestParam(value = "size", defaultValue = "10") int size) {
         return BookingMapper.toBookingDtoList(bookingService.getAllBookings(userId,
-                BookingMapper.toStatus(state), from, size));
+                BookingMapper.toStatus(state), from, size), true);
     }
 
     @GetMapping("/owner")
@@ -55,7 +55,7 @@ public class BookingController {
                                                        @RequestParam(value = "from", defaultValue = "0") int from,
                                                        @RequestParam(value = "size", defaultValue = "10") int size) {
         return BookingMapper.toBookingDtoList(bookingService.getBookingsAllItemsForUser(userId,
-                BookingMapper.toStatus(state), from, size));
+                BookingMapper.toStatus(state), from, size), true);
     }
 
     @DeleteMapping("/{id}")

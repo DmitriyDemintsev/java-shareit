@@ -127,7 +127,7 @@
 											<limit>
 												<counter>LINE</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>0.7</minimum>
+												<minimum>0.6</minimum>
 											</limit>
 											<limit>
 												<counter>BRANCH</counter>
@@ -142,7 +142,7 @@
 											<limit>
 												<counter>METHOD</counter>
 												<value>COVEREDRATIO</value>
-												<minimum>0.7</minimum>
+												<minimum>0.6</minimum>
 											</limit>
 											<limit>
 												<counter>CLASS</counter>

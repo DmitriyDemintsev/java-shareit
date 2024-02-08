@@ -19,21 +19,29 @@ public class CommentMapper {
         );
     }
 
-    public static CommentDto toCommentDto(Comment comment) {
+    public static CommentDto toCommentDto(Comment comment, boolean isIncludeItem) {
+        if (isIncludeItem == true) {
+            return new CommentDto(
+                    comment.getId(),
+                    comment.getText(),
+                    ItemMapper.toItemDto(comment.getItem()),
+                    UserMapper.toUserDto(comment.getAuthor()),
+                    comment.getAuthor().getName(),
+                    comment.getCreated());
+        }
         return new CommentDto(
                 comment.getId(),
                 comment.getText(),
-                ItemMapper.toItemDto(comment.getItem()),
+                null,
                 UserMapper.toUserDto(comment.getAuthor()),
                 comment.getAuthor().getName(),
-                comment.getCreated()
-        );
+                comment.getCreated());
     }
 
-    public static List<CommentDto> toCommentDtoListList(Iterable<Comment> comments) {
+    public static List<CommentDto> toCommentDtoListList(Iterable<Comment> comments, boolean isIncludeItem) {
         List<CommentDto> result = new ArrayList<>();
         for (Comment comment : comments) {
-            result.add(toCommentDto(comment));
+            result.add(toCommentDto(comment, isIncludeItem));
         }
         return result;
     }
